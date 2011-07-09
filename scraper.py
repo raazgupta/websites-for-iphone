@@ -2,15 +2,21 @@ import urllib2
 import re
 from BeautifulSoup import BeautifulSoup
 
-urlStr = 'http://www.hanselman.com/blog/WhyTheAskObamaTweetWasGarbledOnScreenKnowYourUTF8UnicodeASCIIAndANSIDecodingMrPresident.aspx'
+urlStr = 'http://www.kalzumeus.com/2011/07/08/business-psychology/'
 
 page = urllib2.urlopen(urlStr)
 
 soup = BeautifulSoup(''.join(page))
 
-sentenceRegEx = re.compile(r'\w+\s\w+\s\w+\s\w+\s\w+')
+letterRegEx = re.compile(r'\w+')
 
-senList = soup.findAll(text=sentenceRegEx)
+#find the body of the html 
+body = soup.html.body
+
+senList = soup.findAll(text=letterRegEx)
 
 for sen in senList:
-	print sen
+	if sen.parent.name != 'script':
+		print sen
+		if sen.parent.name == 'a':
+			print sen.parent['href']
