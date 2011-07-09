@@ -16,7 +16,10 @@ body = soup.html.body
 senList = soup.findAll(text=letterRegEx)
 
 for sen in senList:
-	if sen.parent.name != 'script':
-		print sen
-		if sen.parent.name == 'a':
-			print sen.parent['href']
+	try:
+		if sen.parent.name != 'script':
+			print sen
+			if sen.parent.name == 'a':
+				print sen.parent['href']
+	except:
+		print "error encoding"
