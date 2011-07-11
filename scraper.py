@@ -6,6 +6,9 @@ from BeautifulSoup import BeautifulSoup
 #Enter the website you want to parse. Not doing any error checking
 #at this point
 urlStr  = raw_input("Enter the website url:")
+#print spaces after the input
+print
+print
 
 #Opening site content and converting to BeautifulSoup format
 page = urllib2.urlopen(urlStr)
