@@ -19,6 +19,7 @@ soup = BeautifulSoup(''.join(page))
 try:
 	titleTag = soup.html.title
 	print titleTag.string
+	print
 except:
 	noTitleError = True
 	
