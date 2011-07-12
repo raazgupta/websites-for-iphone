@@ -1,4 +1,0 @@
-Tags that usually contain text:
-p
-ul-li
-a href within a p
