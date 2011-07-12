@@ -2,8 +2,9 @@
 # -*- coding: UTF-8 -*-
 
 import cgi
-#from BeautifulSoup import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 import urllib2
+import re
 
 # enable debugging
 import cgitb
@@ -19,11 +20,8 @@ def main():
 		print form["website"].value
 		urlStr = form["website"].value
 		page = urllib2.urlopen(urlStr)
-		lines = page.readlines()
-		for line in lines:
-			print line
-		#soup = BeautifulSoup(''.join(page))
-		#print soup.prettify()
+		soup = BeautifulSoup(''.join(page))
+		print soup.prettify()
 	else:
 		print "<h1>Error! Please enter a website</h1>"
 		
