@@ -1,0 +1,127 @@
+Unhappy Security Dialogs | Users in Hell
+Search for:
+ 
+
+Users in Hell
+A blog about software UI design
+&larr;
+ Why SourceForge Lost
+Unhappy Security Dialogs
+It&#8217;s annoying, yes. 
+But it&#8217;s actually a great idea gone wrong.
+ As you know, Windows users are forever downloading stupidly suspicious executable files and then running them, typically with god privileges.
+&#8220;Aha!&#8221; exclaimed an optimistic Windows developer, &#8220;what if there were some way to tell the 
+good
+ programs from the bad?&#8221;
+Did it work? Well, sort of. The 
+technical
+ aspects work just fine:
+The certificate is a signed by a trusted provider, so it&#8217;s likely the software&#8217;s creator is trusted as well.
+The file includes a checksum, so you can&#8217;t modify it and then pass it on as genuine.
+But alas, 
+this is yet another security feature tarnished by idealism.
+Take a look at what the warning for 
+signed
+ binaries looks like:
+Notice the difference? 
+After all that work, 
+you&#8217;ve been promoted from &#8220;angry red popup&#8221; to &#8220;angry orange popup!&#8221; 
+So the dialog will either say &#8220;you are running unsigned code, which is bad&#8221; or &#8220;you are running signed code, which is 
+probably
+ bad&#8221;. 
+It never says &#8220;you&#8217;re OK&#8221;.
+This sends two messages:
+(To publishers)
+ Signing your binaries is nice, but not that big of a deal.
+(To users)
+ Ignore this dialog. 
+This is rather different than the original goal of the dialog, which was &#8220;distinguish between signed and unsigned binaries&#8221;.
+You see, Microsoft has fallen into the common trap of trying to 
+moralize its users
+. It&#8217;s a common temptation; it&#8217;s why Firefox used to make you wait 5 seconds to install extensions, or click through five pages of UI to accept a self-signed certificate.
+If your users are trying to do something risky, you have only two options:
+Ban the behavior outright.
+Give the user useful information so they can make an informed decision.
+&#8220;Being a pain in the ass&#8221; isn&#8217;t an option.
+ It just makes people ignore and despise you. Did you know that Firefox 3&#8242;s original &#8220;self signed certificate&#8221; warning required 
+11 steps
+ to bypass? Users thought 
+Firefox
+ was broken, not them:
+Treat your users like children, and they&#8217;ll ignore every word out of your mouth.
+Signed programs:
+Unsigned programs:
+It&#8217;s clear and direct. It&#8217;s not perfect (as said before, a SSL certificate isn&#8217;t a 100% gauruntee of safety), but it should make an obvious difference between running 
+DropboxInstaller.exe
+ and 
+IMBuddy2011.exe
+. And who knows, people might actually look at it this way.
+Update: Improved the wording of the &#8220;signed&#8221; dialog.
+ 
+Subscribe Now
+ for
+timely posts about making great software.
+
+- or -
+ 
+Get post updates
+ via Twitter.
+
+&larr;
+ Why SourceForge Lost
+Stuartd
+You are incorrect about Firefox&#8217;s installer dialog &#8211; see 
+http://www.squarefree.com/2004/07/01/race-conditions-in-security-dialogs/
+ and 
+https://bugzilla.mozilla.org/show_bug.cgi?id=162020
+Tommy P
+The Firefox dialog isn&#8217;t done for the same reason. It was added to prevent malicious software faking a click to install itself.
+Stathis
+Sure, I think you have a very good point, but in your proposed design I think the unsigned dialog should be a bit more scary.
+Asmo
+Good post, but what&#8217;s with the &#8220;(4)&#8221; -text in the Run-button in the Signed screen?
+ 
+Subscribe Now
+ for
+timely posts about making great software.
+
+- or -
+ 
+Get post updates
+
+via Twitter.
+
+ 
+Recent Posts
+ 
+Unhappy Security Dialogs
+Why SourceForge Lost
+Avoid Useless Confirmation Dialogs
+Clever Names Aren&#8217;t Always a Good Thing
+Recent Comments
+Asmo on 
+Unhappy Security Dialogs
+Stathis on 
+Unhappy Security Dialogs
+Tommy P on 
+Unhappy Security Dialogs
+Stuartd on 
+Unhappy Security Dialogs
+markramm
+ on 
+Why SourceForge Lost
+Archives
+ 
+July 2011
+Topics
+ 
+Uncategorized
+ (4)
+
+ 
+
+Users in Hell	
+
+&copy; 2011
+
+Yup, WordPress works in hell.

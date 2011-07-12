@@ -20,6 +20,10 @@ def scraper(soup):
 	#Print the header for the page
 	print "<html>"
 	print "<head>"
+	
+	#print the styling information
+	print '<link rel="stylesheet" type="text/css" href="http://www.soulofmachine.com/css/iphone.css" media="only screen and (max-width: 480px)" />'
+	print '<meta name="viewport" content="user-scalable=no, width=device-width" />'
 
 	#first just trying to find the title in the header tag and 
 	#printing nothing if no title found
