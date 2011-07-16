@@ -12,11 +12,21 @@ cgitb.enable(1)
 
 #function to check whether the sentence being printed is empty
 #print the sentence inside the right tags
-def printCheck(sen, tag):
+def printCheck(sen, tag, urlStr):
 	#Gracefully fail
 	try:
+		#Do not print out any text found in <script> tags or is empty
 		if sen.parent.name != "script" and sen.string != None and len(sen.string) != 0 and sen.string != '\n':
-			print "<"+tag+">"+sen.string+"</"+tag+">"
+			#Print out a hyperlink instead of plain text if the parent is <a> tag
+			if sen.parent.name != 'a':
+				print "<"+tag+">"+sen.string+"</"+tag+">"
+			else:	
+				hrefId = sen.parent['href']
+				#Make sure the hyperlink contains the website and previous elements. Website tells scraper the website to scrape
+				#Previous tells scraper where the back button should point to
+				#Do do some funny recursive logic that this entails, only 1 level of Back and Forth is allowed
+				#After that the previous element is empty
+				print "<a href='http://www.soulofmachine.com/cgi/scraper.py?website="+hrefId+"&previous=http://www.soulofmachine.com/cgi/scraper.py?website="+urlStr+"'>"+sen.string+"</a>"
 	except:
 		printError = True
 
@@ -25,7 +35,7 @@ print "Content-Type: text/html\n"
 
 
 # website scraper function. Takes in a variable of type BeautifulSoup
-def scraper(soup):
+def scraper(soup, urlStr, previousPage):
 
 	#Print the header for the page
 	print "<html>"
@@ -52,6 +62,9 @@ def scraper(soup):
 	#Open the body tag
 	print "<body>"
 	
+	#Print the Back button
+	print "<a href='"+previousPage+"'>Back</a>"
+	
 	#Print out the title in h1 font
 	print "<h1>", titleStr, "</h1>"
 		
@@ -75,7 +88,7 @@ def scraper(soup):
 				sen = senList[wordPos]
 				#Check that the sentence isn't a part of javascript
 				if sen.parent.name != 'script':
-					printCheck(sen, 'p')
+					printCheck(sen, 'p', urlStr)
 					
 					#Check if this is the last element of senList, then do nothing
 					if wordPos != (wordLen - 1):
@@ -87,7 +100,7 @@ def scraper(soup):
 							#Check whethet the next element is a string and if so
 							#print it. Otherwise skip it
 							if type(currentSen).__name__ == 'NavigableString':
-								printCheck(currentSen, 'p')
+								printCheck(currentSen, 'p', urlStr)
 							currentSen = currentSen.next
 			except:
 				encodingError = True
@@ -105,6 +118,12 @@ def main():
 	# Get the form fields from the previous page
 	form = cgi.FieldStorage()
 	
+	#Print a link to the previous page
+	previousPage = ""
+	if form.has_key("previous") and form["previous"] != "":
+		previousPage = form["previous"].value
+		
+	
 	# The previous page has a text box called 'website'
 	if form.has_key("website") and form["website"] != "":
 		# Store the url in urlStr
@@ -115,7 +134,7 @@ def main():
 			soup = BeautifulSoup(''.join(page))
 			
 			#call the scraper function to find and print the relevant text
-			scraper(soup)
+			scraper(soup, urlStr, previousPage)
 			
 		except:
 			wrongUrlError = 1

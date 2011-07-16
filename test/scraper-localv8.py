@@ -23,6 +23,8 @@ if len(titleStr) > 0:
 
 	#find all the words
 	titleWords = titleStr.split(' ')
+	while '' in titleWords:
+		titleWords.remove('')
 
 	lenWords = len(titleWords)
 
@@ -40,6 +42,8 @@ if len(titleStr) > 0:
 			
 			bodyTitles = body.findAll(text=regEx)
 			
+			
+			
 			for title in bodyTitles:
 				
 				if title.parent.name != 'script':
@@ -51,8 +55,7 @@ if len(titleStr) > 0:
 				break
 
 		print possibleCandidate
-		if possibleCandidate != None:
-			print possibleCandidate.next
+
 	else:
 		print "No body tag found"
 else:
