@@ -15,8 +15,8 @@ cgitb.enable(1)
 def printCheck(sen, tag, urlStr):
 	#Gracefully fail
 	try:
-		#Do not print out any text found in <script> tags or is empty
-		if sen.parent.name != "script" and sen.string != None and len(sen.string) != 0 and sen.string != '\n':
+		#Do not print out any text found in <script> and <style> tags or is empty
+		if sen.parent.name != "script" and sen.parent.name != 'style' and sen.string != None and len(sen.string) != 0 and sen.string != '\n':
 			#Print out a hyperlink instead of plain text if the parent is <a> tag
 			if sen.parent.name != 'a':
 				print "<"+tag+">"+sen.string+"</"+tag+">"
@@ -70,7 +70,7 @@ def scraper(soup, urlStr, previousPage):
 		
 	#Now the tough part
 	#Create a regular expressions that searchs for a string of 7 words
-	wordsRegEx = re.compile(r'[\w]+\s[\w]+\s[\w]+\s[\w]+\s[\w]+\s[\w]+\s[\w]+')
+	wordsRegEx = re.compile(r'[\w,:()]+\s[\w,:()]+\s[\w,:()]+\s[\w,:()]+\s[\w,:()]+\s[\w,:()]+\s[\w,:()]+')
 
 	#find the body of the html 
 	try:
@@ -128,6 +128,12 @@ def main():
 	if form.has_key("website") and form["website"] != "":
 		# Store the url in urlStr
 		urlStr = form["website"].value
+		
+		# For the lazy or dumb among us, if the url is Copy & Paste Link then change to 
+		# http://news.ycombinator.com/
+		if urlStr == "Copy & Paste Link":
+			urlStr = "http://news.ycombinator.com/"
+		
 		# Gracefully kill a wrong url
 		try: 
 			page = urllib2.urlopen(urlStr)
